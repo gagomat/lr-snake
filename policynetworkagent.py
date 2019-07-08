@@ -24,7 +24,7 @@ class PolicyNetworkAgent():
         self.tf_in, self.tf_actions_saved, self.tf_avantage = self._init_tf_var(self.input_shape)
 
         # model du reseau : type cnn
-        self.action, self.logp_as = self._ccn(self.tf_in, self.tf_actions_saved, self.seed)
+        self.action, self.logp_as = self._cnn(self.tf_in, self.tf_actions_saved, self.seed)
 
         # calcul de la fonction a minimiser
         self.actions_loss = self._loss_fct(self.logp_as, self.tf_avantage)
@@ -69,7 +69,7 @@ class PolicyNetworkAgent():
 
         return tf_input, tf_action_saved, tf_avantage
 
-    def _ccn(self, tf_in, action_saved, seed=None):
+    def _cnn(self, tf_in, action_saved, seed=None):
 
         if seed is not None:
             tf.random.set_random_seed(seed)
