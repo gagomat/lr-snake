@@ -76,9 +76,9 @@ class PolicyNetworkAgent():
 
         # architecture du reseau de neuronnes
         in_ex = tf.expand_dims(tf_in, axis=3)
-        conv1 = tf.layers.conv2d(in_ex, 3, 1, activation=tf.nn.relu)
-        conv2 = tf.layers.conv2d(conv1, 3, 1, activation=tf.nn.relu)
-        conv3 = tf.layers.conv2d(conv2, 3, 1, activation=tf.nn.relu)
+        conv1 = tf.layers.conv2d(in_ex, 64, 3, activation=tf.nn.relu)
+        conv2 = tf.layers.conv2d(conv1, 32, 3, activation=tf.nn.relu)
+        conv3 = tf.layers.conv2d(conv2, 18, 3, activation=tf.nn.relu)
 
         flattened = tf.layers.flatten(conv3)
         d1 = tf.layers.dense(flattened, units=256, activation=tf.nn.relu)
@@ -89,7 +89,7 @@ class PolicyNetworkAgent():
         # log des differentes actions (pour le calcul de pi = log(p(action))*avantage)
         log_all_actions = tf.nn.log_softmax(action_logit)
 
-        # prediction de l'action, calcul des log de l'action predite et sauvegardee (pour l'apprentissage)
+        # prediction de l'action, calcul des log de l'action  sauvegardee (pour l'apprentissage)
         action_predicted = tf.squeeze(tf.random.categorical(action_logit, 1), axis=1)
         # log_action_predicted = tf.reduce_sum(tf.one_hot(action_predicted, depth=output_shape)*log_all_actions)
         log_action_saved = tf.reduce_sum(tf.one_hot(action_saved, depth=self.output_shape) * log_all_actions)

@@ -7,7 +7,7 @@ import numpy as np
 
 xsize = 10
 ysize = 10
-buffer_size = 10000
+buffer_size = 5000
 learning_rate = 0.001
 nb_recomp = 1000
 nb_actions = 4
@@ -25,7 +25,7 @@ with tf.Session() as sess:
     agent.set_sess(sess)
 
     recompenses = list()
-    for epoch in range(100000):
+    for epoch in range(50000):
         game.reset()
         while not game.end:
 
