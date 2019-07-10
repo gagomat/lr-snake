@@ -25,7 +25,7 @@ with tf.Session() as sess:
     agent.set_sess(sess)
 
     recompenses = list()
-    for epoch in range(50000):
+    for epoch in range(3000):
         game.reset()
         while not game.end:
 
@@ -41,7 +41,7 @@ with tf.Session() as sess:
                 agent.train()
             elif game.end:
                 agent.buffer.end_game()
-            elif game.istep > 1000:
+            elif game.istep > 100:
                 game.end = 1
                 agent.buffer.end_game()
 

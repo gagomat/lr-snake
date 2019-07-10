@@ -64,7 +64,7 @@ class Snakegame():
 
         else:
             #print('out of grid')
-            self._end_step(end=1, r=-1.)
+            self._end_step(end=1, r=-10.)
 
         #print('action : {}, recomp : {}, end : {} '.format(action,self.r,self.end))
         #print(self.env)

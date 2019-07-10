@@ -3,7 +3,7 @@ import numpy as np
 
 class Buffer(object):
 
-    def __init__(self, buffer_size, input_shape, output_shape, gamma=0.99):
+    def __init__(self, buffer_size, input_shape, output_shape, gamma=0.7):
         self.buffer_size = buffer_size
         self.images = np.zeros((buffer_size, *input_shape))
         self.actions = np.zeros(buffer_size)

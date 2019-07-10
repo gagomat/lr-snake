@@ -86,13 +86,20 @@ class PolicyNetworkAgent():
         action_logit = tf.layers.dense(d2, units=self.output_shape)
 
 
+        # flattened = tf.layers.flatten(tf_in)
+        # d1 = tf.layers.dense(flattened, units=256, activation=tf.nn.relu)
+        # d2 = tf.layers.dense(d1, units=128, activation=tf.nn.relu)
+        # action_logit = tf.layers.dense(d2, units=self.output_shape, activation=None)
+
+
+
         # log des differentes actions (pour le calcul de pi = log(p(action))*avantage)
         log_all_actions = tf.nn.log_softmax(action_logit)
 
         # prediction de l'action, calcul des log de l'action  sauvegardee (pour l'apprentissage)
         action_predicted = tf.squeeze(tf.random.categorical(action_logit, 1), axis=1)
         # log_action_predicted = tf.reduce_sum(tf.one_hot(action_predicted, depth=output_shape)*log_all_actions)
-        log_action_saved = tf.reduce_sum(tf.one_hot(action_saved, depth=self.output_shape) * log_all_actions)
+        log_action_saved = tf.reduce_sum(tf.one_hot(action_saved, depth=self.output_shape) * log_all_actions, axis=1)
 
         return action_predicted, log_action_saved
 
